@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TÍTULO Y DESCRIPCIÓN PARA GOOGLE -->
+    <title>WORLD NEWS | Noticias Globales en Español 24/7</title>
+    <meta name="description" content="Las noticias más importantes del mundo en español. Actualizado cada minuto: política, tecnología, ciencia, economía y más.">
+    
+    <!-- FAVICON (iconito en la pestaña) -->
+    <link rel="icon" href="https://api.iconify.design/twemoji/globe-showing-americas.svg?color=%233b82f6" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="https://api.iconify.design/twemoji/globe-showing-americas.svg?color=%233b82f6">
+
+    <!-- CUANDO LO COMPARTAN EN WHATSAPP, FACEBOOK, etc. -->
+    <meta property="og:title" content="WORLD NEWS - Noticias Globales">
+    <meta property="og:description" content="El portal de noticias internacionales más rápido en español. Actualizado 24/7.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1504711437106-9a572f99b3e1?w=1200&h=630&fit=crop&crop=center">
+    <meta property="og:url" content="https://tupagina.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WORLD NEWS - Noticias Globales">
+    <meta name="twitter:description" content="Noticias del mundo en español, actualizadas al instante.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1504711437106-9a572f99b3e1?w=1200&h=630&fit=crop">
+
+    <!-- Fuentes e iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --accent: #3b82f6;
+            --border: #334155;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .top-banner {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header {
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo-icon {
+            font-size: 4.5rem;
+        }
+        .logo {
+            font-size: 4.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -3px;
+        }
+        .subtitle {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        .search-box {
+            max-width: 750px;
+            margin: 35px auto;
+            position: relative;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 20px 70px 20px 28px;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            color: white;
+            font-size: 1.25rem;
+            outline: none;
+        }
+        #searchInput:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 5px rgba(59,130,246,0.3);
+        }
+        .search-icon {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.6rem;
+            color: #94a3b8;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+        .cat-btn {
+            padding: 14px 32px;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .cat-btn:hover, .cat-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 32px;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .card:hover {
+            transform: translateY(-14px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+        }
+        .card-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 28px;
+        }
+        .source {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+        .desc {
+            color: #cbd5e1;
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+        }
+        .full {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            font-size: 1rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+        .date {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-top: 16px;
+        }
+
+        .loading {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 100px;
+            color: #64748b;
+            font-size: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px 40px;
+            color: #64748b;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        WORLD NEWS • NOTICIAS GLOBALES EN ESPAÑOL • ACTUALIZADO 24/7
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">🌍</div>
+            <h1 class="logo">WORLD NEWS</h1>
+        </div>
+        <p class="subtitle">Las noticias más importantes del planeta, en español y al instante</p>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar en todo el mundo...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+    </header>
+
+    <div class="categories">
+        <button class="cat-btn active" data-cat="">Todo</button>
+        <button class="cat-btn" data-cat="world">Mundo</button>
+        <button class="cat-btn" data-cat="business">Economía</button>
+        <button class="cat-btn" data-cat="technology">Tecnología</button>
+        <button class="cat-btn" data-cat="science">Ciencia</button>
+        <button class="cat-btn" data-cat="health">Salud</button>
+        <button class="cat-btn" data-cat="entertainment">Entretenimiento</button>
+        <button class="cat-btn" data-cat="sports">Deportes</button>
+    </div>
+
+    <main>
+        <div id="newsGrid" class="grid">
+            <div class="loading">Cargando las últimas noticias del mundo...</div>
+        </div>
+        <div id="loader" class="loading" style="display:none;">
+            <i class="fas fa-spinner fa-spin"></i> Cargando más noticias...
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>WORLD NEWS</strong> • Portal de noticias globales en español</p>
+        <p>Powered by GNews API • © 2025 • <a href="#">Términos y Condiciones</a></p>
+    </footer>
+
+    <script>
+        const API_KEY = "c2616d3265ce82dc56cbb1a3530127fe";
+        let page = 1;
+        let category = "";
+        let allArticles = [];
+        let loading = false;
+
+        const grid = document.getElementById("newsGrid");
+        const loader = document.getElementById("loader");
+
+        async function load(append = false) {
+            if (loading) return;
+            loading = true;
+            if (!append) { grid.innerHTML = ""; allArticles = []; page = 1; }
+            loader.style.display = "block";
+
+            let url = `https://gnews.io/api/v4/top-headlines?lang=es&max=20&page=${page}&token=${API_KEY}`;
+            if (category) url += `&topic=${category}`;
+
+            const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+
+            try {
+                const res = await fetch(proxy);
+                const data = await res.json();
+                const json = JSON.parse(data.contents);
+
+                if (!json.articles || json.articles.length === 0) {
+                    loader.style.display = "none";
+                    loading = false;
+                    return;
+                }
+
+                const articles = json.articles;
+                if (append) allArticles.push(...articles);
+                else allArticles = articles;
+
+                render(articles, append);
+                page++;
+            } catch (e) { console.error(e); }
+
+            loader.style.display = "none";
+            loading = false;
+        }
+
+        function render(articles, append) {
+            const html = articles.map(a => `
+                <article class="card">
+                    ${a.image ? `<img src="${a.image}" class="card-img" loading="lazy" alt="${a.title}">` : 
+                        `<div class="card-img" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:white;font-size:4rem;">
+                            🌍
+                        </div>`
+                    }
+                    <div class="card-content">
+                        <div class="source">${a.source.name}</div>
+                        <h3 class="title">${a.title}</h3>
+                        <p class="desc">${a.description || "Sin resumen disponible"}</p>
+                        ${a.content ? `<div class="full">${a.content.replace(/\[\+\d+ chars\]/g, '')}</div>` : ''}
+                        <div class="date">${new Date(a.publishedAt).toLocaleString('es-ES')}</div>
+                    </div>
+                </article>
+            `).join('');
+
+            if (append) grid.innerHTML += html;
+            else grid.innerHTML = html;
+        }
+
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1200) {
+                load(true);
+            }
+        });
+
+        document.getElementById("searchInput").addEventListener("input", e => {
+            const term = e.target.value.toLowerCase();
+            const filtered = allArticles.filter(a => 
+                a.title.toLowerCase().includes(term) || 
+                (a.description && a.description.toLowerCase().includes(term))
+            );
+            render(term ? filtered : allArticles);
+        });
+
+        document.querySelectorAll(".cat-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelector(".cat-btn.active").classList.remove("active");
+                btn.classList.add("active");
+                category = btn.dataset.cat || "";
+                load();
+            });
+        });
+
+        load();
+    </script>
+</body>
+</html>
