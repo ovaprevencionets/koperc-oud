@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
- <meta name="google-site-verification" content="-pho7_SV2IYu9RFTRLldKhxbABmBQJOGp7mWMaub3xo" />
-
+  <meta name="google-site-verification" content="-pho7_SV2IYu9RFTRLldKhxbABmBQJOGp7mWMaub3xo" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KoperCloud • Subida Inteligente de Archivos</title>
@@ -13,6 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Google AdSense (anuncios automáticos) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1169571001318275"
+     crossorigin="anonymous"></script>
+
   <style>
     :root {
       --primary: #6366f1;
@@ -78,7 +82,6 @@
       font-size: 1.4rem;
       margin-top: 16px;
     }
-
     .tabs {
       display: flex;
       justify-content: center;
@@ -103,11 +106,9 @@
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(99,102,241,0.4);
     }
-
     .section { display: none; }
     .section.active { display: block; animation: fadeIn 0.8s ease-out; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
     .card {
       background: var(--card);
       backdrop-filter: blur(20px);
@@ -116,7 +117,6 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
-
     .upload-area {
       border: 4px dashed rgba(129, 140, 248, 0.4);
       border-radius: var(--radius);
@@ -138,7 +138,6 @@
       animation: float 6s ease-in-out infinite;
     }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
     .upload-btn {
       margin-top: 40px;
       padding: 20px 80px;
@@ -154,7 +153,6 @@
     }
     .upload-btn:hover { transform: translateY(-10px) scale(1.05); }
     .upload-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-
     .status-message {
       margin-top: 32px;
       padding: 24px;
@@ -168,7 +166,6 @@
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100% { opacity: 0.8; } 50% { opacity: 1; } }
-
     .progress-container {
       margin-top: 32px;
       height: 14px;
@@ -184,7 +181,6 @@
       border-radius: 7px;
       transition: width 0.4s ease;
     }
-
     .result {
       margin-top: 40px;
       padding: 40px;
@@ -209,7 +205,6 @@
       font-size: 1.1rem;
       border: 1px solid rgba(255,255,255,0.2);
     }
-
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -235,7 +230,6 @@
     }
     .file-name { font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
     .file-meta { color: var(--text-light); }
-
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -259,9 +253,7 @@
   </style>
 </head>
 <body>
-
 <canvas id="particles"></canvas>
-
 <div class="container">
   <header>
     <div class="logo">
@@ -270,13 +262,11 @@
     <h1>KoperCloud</h1>
     <p class="subtitle">Subida inteligente • Imágenes y vídeos • Hasta 500 MB</p>
   </header>
-
   <div class="tabs">
     <div class="tab active" data-section="upload">Subir archivo</div>
     <div class="tab" data-section="my-files">Mis archivos</div>
     <div class="tab" data-section="stats">Estadísticas</div>
   </div>
-
   <!-- Subir archivo -->
   <div id="upload" class="section active">
     <div class="card">
@@ -289,15 +279,12 @@
         <p id="fileInfo" style="margin-top:24px;font-weight:700;color:var(--primary-light)"></p>
       </div>
       <button class="upload-btn" id="uploadBtn">Subir archivo</button>
-
       <!-- Mensaje mientras genera -->
       <div class="status-message" id="generatingMessage">
         <i class="fas fa-spinner fa-spin" style="margin-right:10px"></i>
         Generando tu enlace seguro...
       </div>
-
       <div class="progress-container" id="progress"><div class="progress-bar"></div></div>
-
       <!-- Resultado con confetti -->
       <div class="result" id="result">
         <i class="fas fa-check-circle success-icon"></i>
@@ -307,7 +294,6 @@
       </div>
     </div>
   </div>
-
   <!-- Mis archivos -->
   <div id="my-files" class="section">
     <div class="card">
@@ -319,7 +305,6 @@
       </div>
     </div>
   </div>
-
   <!-- Estadísticas -->
   <div id="stats" class="section">
     <div class="card">
@@ -350,7 +335,6 @@
   const SUPABASE_URL = "https://nftadnvaynvsvgtlbcua.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_T1rHKbZYu1YFeJFaSFXvkw_Uldl4iZr";
   const BUCKET = "image";
-
   // Estadísticas
   let stats = JSON.parse(localStorage.getItem('kopercloud_stats')) || { totalFiles: 0, totalSize: 0, images: 0, videos: 0 };
   function updateStats() {
@@ -360,7 +344,6 @@
     document.getElementById('videosCount').textContent = stats.videos;
   }
   updateStats();
-
   // Partículas
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
@@ -386,7 +369,6 @@
     requestAnimationFrame(animate);
   }
   animate();
-
   // Pestañas
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -396,12 +378,10 @@
       document.getElementById(this.dataset.section).classList.add('active');
     });
   });
-
   // Subida
   const dropZone = document.getElementById('dropZone');
   const fileInput = document.getElementById('fileInput');
   const fileInfo = document.getElementById('fileInfo');
-
   ['dragover', 'dragenter'].forEach(e => dropZone.addEventListener(e, ev => { ev.preventDefault(); dropZone.classList.add('dragover'); }));
   ['dragleave', 'drop'].forEach(e => dropZone.addEventListener(e, () => dropZone.classList.remove('dragover')));
   dropZone.addEventListener('drop', e => {
@@ -415,28 +395,22 @@
   fileInput.addEventListener('change', () => {
     if (fileInput.files[0]) fileInfo.textContent = `Seleccionado: ${fileInput.files[0].name}`;
   });
-
   document.getElementById('uploadBtn').addEventListener('click', async () => {
     const file = fileInput.files[0];
     if (!file) return alert("Selecciona un archivo");
-
     const isVideo = file.type.startsWith('video/');
     const maxSize = 500 * 1024 * 1024;
     if (file.size > maxSize) return alert("Máximo 500 MB");
-
     const btn = document.getElementById('uploadBtn');
     const progress = document.getElementById('progress');
     const bar = progress.querySelector('.progress-bar');
     const generatingMsg = document.getElementById('generatingMessage');
-
     btn.disabled = true;
     progress.style.display = 'block';
     generatingMsg.style.display = 'block';
     bar.style.width = '70%';
-
     const ext = file.name.split('.').pop();
     const name = `${Date.now()}_${crypto.randomUUID().slice(0,8)}.${ext}`;
-
     try {
       const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${name}`, {
         method: 'POST',
@@ -447,9 +421,7 @@
         },
         body: file
       });
-
       if (!res.ok) throw new Error("Error al subir");
-
       // Confetti épico
       confetti({
         particleCount: 250,
@@ -457,31 +429,27 @@
         origin: { y: 0.6 },
         colors: ['#6366f1', '#a78bfa', '#10b981', '#ffffff']
       });
-
       const url = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${name}`;
       document.getElementById('fileUrl').textContent = url;
       document.getElementById('result').style.display = 'block';
       generatingMsg.style.display = 'none';
       bar.style.width = '100%';
-
       // Stats
       stats.totalFiles++;
       stats.totalSize += file.size;
       if (isVideo) stats.videos++; else stats.images++;
       localStorage.setItem('kopercloud_stats', JSON.stringify(stats));
       updateStats();
-
       // Galería
       const gallery = document.getElementById('gallery');
       if (gallery.querySelector('p')) gallery.innerHTML = '';
       const card = document.createElement('div');
       card.className = 'file-card';
-      card.innerHTML = isVideo 
+      card.innerHTML = isVideo
         ? `<video controls preload="metadata"><source src="${url}#t=0.1"></video>`
         : `<img src="${url}" loading="lazy">`;
       card.innerHTML += `<div class="file-info"><div class="file-name">${file.name}</div><div class="file-meta">${isVideo ? 'Vídeo' : 'Imagen'} • ${new Date().toLocaleString()}</div></div>`;
       gallery.prepend(card);
-
       setTimeout(() => {
         progress.style.display = 'none';
         bar.style.width = '0%';
@@ -489,7 +457,6 @@
         fileInput.value = '';
         fileInfo.textContent = '';
       }, 2000);
-
     } catch (e) {
       alert("Error: " + e.message);
       btn.disabled = false;
@@ -497,7 +464,6 @@
       generatingMsg.style.display = 'none';
     }
   });
-
   document.getElementById('copyBtn').addEventListener('click', () => {
     navigator.clipboard.writeText(document.getElementById('fileUrl').textContent);
     alert('Enlace copiado al portapapeles');
